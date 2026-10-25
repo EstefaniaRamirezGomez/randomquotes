@@ -1,6 +1,7 @@
 const express = require('express')
+const os = require('os')
 const app = express()
-const port = 3000
+const port = 80
 
 const phrases = [
   "Get ready to be inspired…",
@@ -13,10 +14,8 @@ const phrases = [
 ]
 
 app.get('/', (req, res) => {
-  const number = Math.floor(Math.random() * 7)
-  res.send(phrases[number])
+  const number = Math.floor(Math.random() * phrases.length)
+  res.send(phrases[number] + " - Container Id: " + os.hostname())
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.listen(port, "0.0.0.0", () => console.log(`Server on ${port}`))
